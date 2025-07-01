@@ -1,0 +1,785 @@
+/* Resetare stiluri implicite și setări de bază */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --primary-color: #1b2941;
+  --accent-color: #f3f3f3;
+  --light-bg: #ccc;
+  --dark-overlay: rgba(0, 0, 0, 0.6);
+  --white: #fff;
+}
+
+
+
+body {
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* ascunde scroll-ul cât timp se încarcă */
+}
+
+/* === PRELOADER === */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0a0a0ae4; /* fundal întunecat */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #d27e39fd;
+  z-index: 9999;
+  transition: opacity 1s ease;
+}
+
+#preloader p {
+  margin-top: 20px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* === LOADER FACEBOOK STYLE === */
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  color: #d27e39d1; /* poți schimba culoarea aici */
+}
+.lds-facebook,
+.lds-facebook div {
+  box-sizing: border-box;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: currentColor;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0s;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* Setări globale */
+body,
+html {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
+  /* Scroll lin între secțiuni */
+}
+
+/* Secțiunea principală Hero cu fundal imagine și text central */
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('background.jpg');
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 100px;
+}
+
+
+/* Bara de navigare (navbar) fixă în partea de sus */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 60px;
+  color: #ccc;
+}
+
+
+
+/* Stiluri pentru titlul și sloganul logo-ului */
+.logo h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 80px;
+  /* sau cât vrei tu */
+  object-fit: contain;
+}
+
+/* Meniu orizontal */
+nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+
+
+/* Linie animată la hover și activ */
+.navbar nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+/* Hover */
+.navbar nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Active (pagina curentă sau scroll current section) */
+.navbar nav ul li a.active::after {
+  width: 100%;
+  background-color: #f3f3f3;
+}
+
+
+.navbar.shrink {
+  padding: 5px 30px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+
+
+
+
+
+
+
+/* Textul din Hero */
+.content {
+  text-align: center;
+  padding: 80px 20px 60px; 
+}
+
+.subtitle {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+/* Secțiunea Connect care include About + Connect */
+.services-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Subsecțiunea About Us */
+.about {
+  flex: 1;
+  padding: 120px 60px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.about-title,
+.about-text {
+  width: 50%;
+}
+
+.about-title h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: left;
+  color: aliceblue;
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: right;
+  color: aliceblue;
+}
+
+
+.connect-section {
+  padding: 0px 0px 160px;
+  display: flex;
+  justify-content: center;
+  color: #111;
+  font-family: 'Arial', sans-serif;
+  background-color: #ccc;
+}
+
+.connect-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: white;
+  overflow: hidden;
+}
+
+.connect-image {
+  flex: 1 1 40%;
+}
+
+.connect-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.connect-form {
+  flex: 1 1 50%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.connect-form h3 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.connect-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+textarea {
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+  resize: vertical;
+  min-height: 120px;
+  width: 100%;
+}
+
+button {
+  align-self: flex-start;
+  padding: 12px 28px;
+  background: white;
+  border: 2px solid #111;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #111;
+  color: white;
+}
+
+/* Responsive pentru mobil */
+@media (max-width: 768px) {
+  .connect-container {
+    flex-direction: column;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .connect-image {
+    height: 300px;
+  }
+
+  .connect-image img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+
+
+
+
+
+
+/* Footer social fix pe ecran */
+.social-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 10px 0;
+  background-color: rgba(129, 122, 122, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.social-footer img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(100%) invert(100%);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.social-footer img:hover {
+  transform: scale(1.2);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .connect-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .connect-image,
+  .connect-form {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .connect-image img {
+    max-width: 100%;
+  }
+
+  .social-footer {
+    position: static;
+    background-color: rgba(129, 122, 122, 1);
+  }
+}
+
+@media (max-width: 480px) {
+  .connect-form h3 {
+    font-size: 24px;
+  }
+
+  .connect-form,
+  .connect-section {
+    padding: 30px 20px;
+  }
+}
+
+
+
+
+.projects-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* centru orizontal */
+  justify-content: center;
+  /* centru vertical */
+  min-height: 100vh;
+  padding-top: 70px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+}
+
+
+
+.projects-section h2 {
+  margin-top: 80px;
+  font-size: 36px;
+  margin-bottom: 60px;
+}
+
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+
+
+.project-card {
+  background-color: #2e2e2e;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 40px 40px 120px rgba(240, 234, 234, 0.2);
+  transition: transform 0.3s;
+  text-align: start;
+  font-family: 'Montserrat', sans-serif;
+  color: #f0f0f0;
+  text-decoration-color: #1b2941;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.project-card h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Lucida Sans', sans-serif;
+  font-style: oblique;
+}
+
+.project-card video {
+  width: 100%;
+  object-fit: cover;
+  /* Taie marginile și centrează */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: block;
+  padding-top: 20px;
+}
+
+
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.overlay-content {
+
+  background: #d2cfcf;
+  padding: 30px 50px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(39, 33, 80);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  display: none;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+/* ================= Media Queries Responsive ================== */
+
+/* Tablete și ecrane medii */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 5px 30px;
+  }
+  
+  .logo h1 {
+    font-size: 20px;
+  }
+  
+  nav ul {
+    gap: 20px;
+  }
+  
+  .content {
+    margin-top: 250px;
+    margin-bottom: 60px;
+  }
+  
+  .title {
+    font-size: 38px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+  }
+  
+  .about-container {
+    flex-direction: column;
+    padding: 60px 20px 40px;
+  }
+  
+  .about-title,
+  .about-text {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .about-text p {
+    text-align: center;
+  }
+  
+  .projects-section h2 {
+    font-size: 28px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+  
+  .project-card {
+    width: 320px;
+    padding: 15px;
+  }
+}
+
+/* Tablete mici și telefoane mari */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 5px 20px;
+  }
+  
+  .logo h1 {
+    font-size: 18px;
+  }
+  
+  nav ul {
+    gap: 15px;
+    font-size: 14px;
+  }
+  
+  .content {
+    margin-top: 200px;
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    font-size: 32px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .about-container {
+    padding: 40px 15px 30px;
+  }
+  
+  .projects-section {
+    padding-top: 60px;
+  }
+  
+  .projects-section h2 {
+    margin-top: 40px;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .projects-grid {
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .project-card {
+    width: 280px;
+    padding: 15px;
+  }
+  
+  /* Connect section deja ai media query - păstrată */
+}
+
+/* Telefoane mobile */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 5px 15px;
+  }
+  
+  .logo h1 {
+    font-size: 16px;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+  }
+  
+  .content {
+    margin-top: 150px;
+    margin-bottom: 30px;
+    padding: 0 10px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+  }
+  
+  .about-container {
+    flex-direction: column;
+    padding: 30px 10px 20px;
+  }
+  
+  .about-title,
+  .about-text {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .projects-section h2 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .projects-grid {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .project-card {
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+  }
+  
+  .connect-section,
+  .connect-form,
+  .connect-image {
+    padding: 20px 10px !important;
+  }
+  
+  /* Fonturi formular */
+  .connect-form h3 {
+    font-size: 20px !important;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px 0;
+  }
+  
+  .social-footer {
+    flex-direction: column;
+    gap: 20px;
+    position: static;
+    background-color: rgba(129, 122, 122, 1);
+  }
+}
