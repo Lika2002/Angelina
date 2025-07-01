@@ -89,9 +89,47 @@ body {
 
 
 
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: rgba(112, 119, 122, 0.3); /* culoare albastră translucidă */
+  border: 2px solid #c5cbce;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  backdrop-filter: blur(2px);
+}
 
 
+.cursor-bubble {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 137, 2, 0.5); /* galben translucid */
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(10px);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+  z-index: 9999;
+}
 
+
+.typed-container {
+  margin-top: 10px;
+  font-size: 1.25rem;
+  color: #d27e39;  /* culoare asemănătoare cu site */
+  font-weight: 500;
+  min-height: 30px; /* să nu sară conținutul la schimbare */
+  font-family: 'Montserrat', sans-serif;
+}
 
 
 
@@ -227,160 +265,378 @@ nav ul li a {
   overflow: hidden;
 }
 
-/* Subsecțiunea About Us */
-.about {
-  flex: 1;
-  padding: 120px 60px 40px;
+
+
+
+
+
+
+
+
+/* --- About Me Section --- */
+
+
+.about-section {
+  min-height: 100vh;
+  padding-top: 120px; /* ca să nu se suprapună sub navbar */
+  padding-bottom: 80px; /* spațiu deasupra footerului */
+  background-color: #2b2c2f; /* fundal negru */
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-color);
-
 }
 
-.about-container {
+.about-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   max-width: 1200px;
-  margin: auto;
+  width: 100%;
   padding: 0 20px;
+  gap: 60px;
 }
 
-.about-title,
+
 .about-text {
-  width: 50%;
+  flex: 1;
+  max-width: 50%;
 }
 
-.about-title h2 {
+.about-text h2 {
   font-size: 3rem;
-  font-weight: bold;
-  text-align: left;
-  color: aliceblue;
+  margin-bottom: 20px;
+  color: #f3f3f3;
 }
 
 .about-text p {
   font-size: 1.2rem;
-  line-height: 1.8;
-  text-align: right;
-  color: aliceblue;
+  line-height: 1.6;
+  color: #ccc;
 }
+
+#pyramid-container {
+  position: relative;
+  width: 350px;
+  height: 400px;
+  flex-shrink: 0;
+  perspective: 1000px;
+}
+
+
+
+
+
+/* Stil general pentru fiecare imagine */
+/* Imagine + titlu sub ea */
+.pyramid-image {
+  position: absolute;
+  top: 50%;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: brightness(0.7);
+  width: 255px;
+  height: auto;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+/* Imaginea propriu-zisă */
+.pyramid-image img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 30px;
+}
+
+/* Titlul sub imagine */
+.image-title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-shadow: 0 0 3px black;
+}
+
+
+/* Imaginea centrala */
+.pyramid-image.center {
+  left: 50%;
+  width: 300px;
+  height: 375px;
+  transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+  z-index: 3;
+  filter: brightness(1);
+}
+
+/* Imaginea din stanga */
+.pyramid-image.left {
+  left: 5%;
+  transform: translate(-50%, -50%) rotateY(45deg) scale(0.85);
+}
+
+/* Imaginea din dreapta */
+.pyramid-image.right {
+  left: 95%;
+  transform: translate(-50%, -50%) rotateY(-45deg) scale(0.85);
+}
+
+/* === Caseta gri translucidă pentru text About Me === */
+.about-text {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05); /* gri translucid */
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+}
+
+/* Efect portocaliu animat la hover pentru caseta About Me */
+.about-text::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 18px;
+  border: 2px solid orange;
+  opacity: 0;
+  transform: rotate(0deg);
+  transition: opacity 0.3s, transform 0.6s ease;
+  z-index: 0;
+}
+
+.about-text:hover::before {
+  opacity: 1;
+  transform: rotate(360deg);
+}
+
+/* Să nu suprapună textul peste bordura animată */
+.about-text p,
+.about-text h2 {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
+/* Efect portocaliu și mărire la hover pentru imaginea întreagă */
+/* Eliminăm efectele anterioare */
+.pyramid-image::before {
+  content: none;
+}
+
+/* Efect glow portocaliu discret sub imagine la hover */
+.pyramid-image:hover img {
+  box-shadow: 0 0 20px 6px rgba(255, 140, 0, 0.5);
+  transition: box-shadow 0.4s ease-in-out;
+}
+
+
+
+
+.skills-section {
+  background-color: black;
+  color: #d3d3cc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 80px 60px;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  gap: 40px;
+}
+
+.skills-section .left {
+  flex: 1;
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: pre-line;
+  /* scoatem animația pe element întreg */
+  color: #d3d3cc;
+}
+
+.skills-section .left span {
+  color: #d3d3cc;
+  transition: color 0.3s ease;
+}
+
+/* Clasa aplicată literei când o vrem portocalie */
+.skills-section .left span.colored {
+  color: orange;
+  transition: color 0.3s ease;
+}
+
+
+.skills-section .right {
+  flex: 2;
+  padding-left: 40px;
+}
+
+.skills-title-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.skills-title {
+  position: relative;
+  color: white;
+  font-size: 60px;
+  z-index: 2;
+}
+
+
+.skills-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 100px;
+  color: rgba(255, 165, 0, 0.1); /* portocaliu deschis transparent */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.skills-columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.skills-columns > div {
+  flex: 1;
+  min-width: 200px;
+}
+
+.skills-columns h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: rgba(197, 86, 26, 0.909);
+}
+
+.skills-columns li {
+  font-family: monospace;
+  color: white;
+  font-size: 16px;
+  list-style: none;
+  margin-bottom: 6px;
+  white-space: pre;
+}
+
+/* Cursor animat ca la masina de scris */
+.typewriter-cursor::after {
+  content: '|';
+  animation: blink 0.8s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+
+
+
+
 
 
 .connect-section {
-  padding: 0px 0px 160px;
+  padding: 100px 0;
+  background: radial-gradient(circle at top, #111 0%, #000 100%);
+  color: white;
   display: flex;
   justify-content: center;
-  color: #111;
-  font-family: 'Arial', sans-serif;
-  background-color: #ccc;
+  align-items: center;
 }
 
 .connect-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 25px 4px rgba(255, 140, 0, 0.6);
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  background-color: white;
-  overflow: hidden;
-}
-
-.connect-image {
-  flex: 1 1 40%;
-}
-
-.connect-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.connect-form {
-  flex: 1 1 50%;
-  padding: 10px;
-  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
 }
 
 .connect-form h3 {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 28px;
+  color: white;
   margin-bottom: 30px;
 }
 
 .connect-form form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .form-row {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: row; /* pe orizontală */
+  gap: 20px;
 }
 
 .form-row input {
-  flex: 1;
-  padding: 10px;
-  font-size: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #f9f9f9;
+  flex: 1; /* se extind egal */
+}
+
+
+.form-row input,
+textarea {
+  width: 100%;
+  padding: 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  background-color: #1f1f1f;
+  color: white;
+  outline: none;
 }
 
 textarea {
-  padding: 10px;
-  font-size: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #f9f9f9;
-  resize: vertical;
   min-height: 120px;
-  width: 100%;
+  resize: vertical;
 }
 
 button {
-  align-self: flex-start;
-  padding: 12px 28px;
-  background: white;
-  border: 2px solid #111;
-  color: #111;
-  font-size: 16px;
+  background-color: #fff;
+  color: #000;
   font-weight: 600;
-  border-radius: 8px;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 
 button:hover {
-  background: #111;
-  color: white;
+  background-color: #da5e0cda;
+  color: #fff;
 }
 
-/* Responsive pentru mobil */
-@media (max-width: 768px) {
-  .connect-container {
-    flex-direction: column;
-  }
-
+@media (max-width: 600px) {
   .form-row {
     flex-direction: column;
-  }
-
-  .connect-image {
-    height: 300px;
-  }
-
-  .connect-image img {
-    height: 100%;
-    object-fit: cover;
-  }
-
-
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 32px;
   }
 }
 
@@ -550,11 +806,11 @@ button:hover {
 
 .overlay-content {
 
-  background: #d2cfcf;
+  background: #c9c1c1c2;
   padding: 30px 50px;
   font-size: 20px;
   font-weight: bold;
-  color: rgb(39, 33, 80);
+  color: rgba(118, 69, 8, 0.888);
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
