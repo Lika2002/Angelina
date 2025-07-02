@@ -244,3 +244,10 @@ setTimeout(() => {
   setInterval(rotatePyramid, 4000);
 }, 4000);
 
+// Toggle pentru meniu pe mobil
+const menuToggle = document.getElementById("menu-toggle");
+const navbarMenu = document.getElementById("navbar-menu");
+
+menuToggle.addEventListener("click", () => {
+  navbarMenu.classList.toggle("open");
+});

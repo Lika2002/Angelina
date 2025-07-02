@@ -1039,3 +1039,76 @@ button:hover {
     background-color: rgba(129, 122, 122, 1);
   }
 }
+
+/* ===== MENU RESPONSIVE ===== */
+
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Pe mobil, arătăm butonul și ascundem meniul */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav#navbar-menu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 1000;
+  }
+
+  nav#navbar-menu.open {
+    display: flex;
+  }
+
+  nav#navbar-menu ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  nav#navbar-menu ul li a {
+    font-size: 18px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  #pyramid-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    perspective: none;
+  }
+
+  .pyramid-image {
+    position: relative !important;
+    transform: none !important;
+    left: auto !important;
+    width: 90%;
+    max-width: 300px;
+    transform-style: flat;
+    z-index: 1 !important;
+  }
+
+  .pyramid-image img {
+    width: 100%;
+    height: auto;
+  }
+}
