@@ -68,6 +68,7 @@ if (skillsSection) {
       if (entry.isIntersecting) {
         animateSkillsText(); // animă textul h1
         startSkillsTypingAnimation(); // animă lista cu skilluri
+        skillsAlreadyAnimated = true; // ✅ marchează că animația a fost deja făcută
       }
     });
   }, {
