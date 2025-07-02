@@ -163,6 +163,14 @@ document.addEventListener('mousemove', (e) => {
   cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
 });
 
+// Touch pentru telefon/tabletă
+document.addEventListener('touchmove', e => {
+  if (e.touches.length > 0) {
+    mouseX = e.touches[0].clientX;
+    mouseY = e.touches[0].clientY;
+  }
+}, { passive: true });
+
 const bubble = document.querySelector('.cursor-bubble');
 
 let mouseX = window.innerWidth / 2;
