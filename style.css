@@ -634,11 +634,10 @@ button:hover {
   color: #fff;
 }
 
-@media (max-width: 600px) {
-  .form-row {
-    flex-direction: column;
-  }
-}
+
+
+
+
 
 
 
@@ -648,13 +647,16 @@ button:hover {
 
 /* Footer social fix pe ecran */
 .social-footer {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 999;
   display: flex;
-  justify-content: center;
   gap: 40px;
   padding: 10px 0;
   background-color: rgba(129, 122, 122, 0.7);
@@ -673,40 +675,16 @@ button:hover {
   transform: scale(1.2);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-  .connect-container {
+
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* General form adjustment */
+@media (max-width: 600px) {
+  .form-row {
     flex-direction: column;
-    text-align: center;
-  }
-
-  .connect-image,
-  .connect-form {
-    max-width: 100%;
-    flex: 1 1 100%;
-  }
-
-  .connect-image img {
-    max-width: 100%;
-  }
-
-  .social-footer {
-    position: static;
-    background-color: rgba(129, 122, 122, 1);
   }
 }
-
-@media (max-width: 480px) {
-  .connect-form h3 {
-    font-size: 24px;
-  }
-
-  .connect-form,
-  .connect-section {
-    padding: 30px 20px;
-  }
-}
-
 
 
 
@@ -902,60 +880,6 @@ button:hover {
   }
 }
 
-/* Tablete mici și telefoane mari */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 5px 20px;
-  }
-  
-  .logo h1 {
-    font-size: 18px;
-  }
-  
-  nav ul {
-    gap: 15px;
-    font-size: 14px;
-  }
-  
-  .content {
-    margin-top: 200px;
-    margin-bottom: 40px;
-  }
-  
-  .title {
-    font-size: 32px;
-  }
-  
-  .subtitle {
-    font-size: 16px;
-  }
-  
-  .about-container {
-    padding: 40px 15px 30px;
-  }
-  
-  .projects-section {
-    padding-top: 60px;
-  }
-  
-  .projects-section h2 {
-    margin-top: 40px;
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-  
-  .projects-grid {
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .project-card {
-    width: 280px;
-    padding: 15px;
-  }
-  
-  /* Connect section deja ai media query - păstrată */
-}
 
 /* Telefoane mobile */
 @media (max-width: 480px) {
@@ -1038,6 +962,32 @@ button:hover {
     position: static;
     background-color: rgba(129, 122, 122, 1);
   }
+
+  .social-footer {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 8px 0;
+    flex-wrap: wrap;
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(129, 122, 122, 0.9);
+  }
+
+  .social-footer img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .connect-form h3 {
+    font-size: 24px;
+  }
+
+  .connect-form,
+  .connect-section {
+    padding: 30px 20px;
+  }
+
 }
 
 /* ===== MENU RESPONSIVE ===== */
@@ -1050,8 +1000,61 @@ button:hover {
   z-index: 1001;
 }
 
-/* Pe mobil, arătăm butonul și ascundem meniul */
+
+
+/* Tablete mici și telefoane mari */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 5px 20px;
+  }
+  
+  .logo h1 {
+    font-size: 18px;
+  }
+  
+  nav ul {
+    gap: 15px;
+    font-size: 14px;
+  }
+  
+  .content {
+    margin-top: 200px;
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    font-size: 32px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .about-container {
+    padding: 40px 15px 30px;
+  }
+  
+  .projects-section {
+    padding-top: 60px;
+  }
+  
+  .projects-section h2 {
+    margin-top: 40px;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .projects-grid {
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .project-card {
+    width: 280px;
+    padding: 15px;
+  }
+  
+
   .menu-toggle {
     display: block;
   }
@@ -1083,12 +1086,7 @@ button:hover {
   nav#navbar-menu ul li a {
     font-size: 18px;
   }
-}
 
-
-
-
-@media (max-width: 768px) {
   .about-content {
     flex-direction: column;
     align-items: center;
@@ -1123,4 +1121,25 @@ button:hover {
   .pyramid-image.right {
     left: 95%;
   }
+
+  .connect-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .connect-image,
+  .connect-form {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .connect-image img {
+    max-width: 100%;
+  }
+
+  .social-footer {
+    position: static;
+    background-color: rgba(129, 122, 122, 1);
+  }
+
 }
