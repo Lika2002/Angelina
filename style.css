@@ -1086,29 +1086,41 @@ button:hover {
 }
 
 
+
+
 @media (max-width: 768px) {
-  #pyramid-container {
-    width: 100%;
-    height: auto;
-    display: flex;
+  .about-content {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    perspective: none;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .about-text {
+    max-width: 100%;
+  }
+
+  #pyramid-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: 400px;
   }
 
   .pyramid-image {
-    position: relative !important;
-    transform: none !important;
-    left: auto !important;
-    width: 90%;
-    max-width: 300px;
-    transform-style: flat;
-    z-index: 1 !important;
+    width: 255px;
   }
 
-  .pyramid-image img {
-    width: 100%;
-    height: auto;
+  .pyramid-image.center {
+    width: 300px;
+    height: 375px;
+  }
+
+  .pyramid-image.left {
+    left: 5%;
+  }
+
+  .pyramid-image.right {
+    left: 95%;
   }
 }

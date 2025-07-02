@@ -251,3 +251,20 @@ const navbarMenu = document.getElementById("navbar-menu");
 menuToggle.addEventListener("click", () => {
   navbarMenu.classList.toggle("open");
 });
+
+// Închide meniul automat când se face click pe un link
+const menuLinks = document.querySelectorAll("#navbar-menu a");
+
+menuLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    if (navbarMenu.classList.contains("open")) {
+      navbarMenu.classList.remove("open");
+    }
+  });
+});
+
+
+function toggleMenu() {
+  const navList = document.querySelector('.navbar nav ul');
+  navList.classList.toggle('active');
+}
