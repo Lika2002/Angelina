@@ -324,9 +324,6 @@ nav ul li a {
 }
 
 
-
-
-
 /* Stil general pentru fiecare imagine */
 /* Imagine + titlu sub ea */
 .pyramid-image {
@@ -1099,27 +1096,25 @@ button:hover {
   }
 
   #pyramid-container {
-    position: relative;
-    width: 100%;
-    max-width: 350px;
-    height: 400px;
+    max-width: 280px;
+    height: 320px;
   }
 
   .pyramid-image {
-    width: 255px;
+    width: 200px;
   }
 
   .pyramid-image.center {
-    width: 300px;
-    height: 375px;
+    width: 240px;
+    height: 300px;
   }
 
   .pyramid-image.left {
-    left: 5%;
+    left: 12%;
   }
 
   .pyramid-image.right {
-    left: 95%;
+    left: 88%;
   }
 
   .connect-container {
