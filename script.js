@@ -28,55 +28,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+  // --- Variabilă globală pentru control ---
+  let skillsAlreadyAnimated = false;
 
-  
+  function resetSkillsSection() {
+  const h1 = document.getElementById('animated-skills-text');
+  const text = h1.getAttribute('data-original-text');
+
+  if (text) {
+    h1.innerHTML = text; // pune înapoi textul original cu <br>
+  }
+
+  // Golește complet listele de skilluri
+  document.getElementById("skills-tools").innerHTML = "";
+  document.getElementById("skills-frameworks").innerHTML = "";
+  document.getElementById("skills-core").innerHTML = "";
+}
+
+
   // --- Animația textului pornită imediat ---
   function animateSkillsText() {
-  const h1 = document.getElementById('animated-skills-text');
-  if (!h1) return;
+    const h1 = document.getElementById('animated-skills-text');
+    if (!h1) return;
 
-  const text = h1.getAttribute('data-original-text') || h1.textContent.replace(/\s+/g, ' ').trim();
-  h1.innerHTML = '';
-  h1.setAttribute('data-original-text', text);
+    // Dacă deja are span-uri, oprește animația
+    if (h1.querySelector('span')) return;
 
-  for (let char of text) {
-    const span = document.createElement('span');
-    span.textContent = char;
-    h1.appendChild(span);
-  }
+    const text = h1.getAttribute('data-original-text') || h1.innerHTML;
+    h1.innerHTML = ''; // curăță conținutul inițial
+    h1.setAttribute('data-original-text', text);
 
-  const spans = h1.querySelectorAll('span');
-  let index = 0;
+    // Transformați textul în caractere, inclusiv <br>
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = text;
+    const nodes = Array.from(tempDiv.childNodes);
 
-  function colorizeLetters() {
-    if (index < spans.length) {
-      spans[index].classList.add('colored');
-      index++;
-      setTimeout(colorizeLetters, 150);
-    }
-  }
-
-  colorizeLetters();
-}
-
-// Observator pentru secțiunea skills
-const skillsSection = document.querySelector('#skills');
-
-if (skillsSection) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateSkillsText(); // animă textul h1
-        startSkillsTypingAnimation(); // animă lista cu skilluri
-        skillsAlreadyAnimated = true; // ✅ marchează că animația a fost deja făcută
+    nodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        // Split textul normal în caractere
+        for (let char of node.textContent) {
+          const span = document.createElement('span');
+          span.textContent = char;
+          h1.appendChild(span);
+        }
+      } else if (node.nodeName === 'BR') {
+        h1.appendChild(document.createElement('br'));
       }
     });
-  }, {
-    threshold: 0.5
-  });
 
-  observer.observe(skillsSection);
-}
+    // Animația literă cu literă
+    const spans = h1.querySelectorAll('span');
+    let index = 0;
+
+    function colorizeLetters() {
+      if (index < spans.length) {
+        spans[index].classList.add('colored');
+        index++;
+        setTimeout(colorizeLetters, 150);
+      }
+    }
+
+    colorizeLetters();
+  }
 
 
 
@@ -84,7 +97,7 @@ if (skillsSection) {
 
   const skillsData = {
     "skills-tools": [
-      "Python", "SQL", "C++", "Java", "Typescript", "JavaScript", "Git", "Postman", "Docker", "Firebase"
+      "Python", "SQL", "C++", "Java", "C#", "JavaScript", "HTML", "CSS"
     ],
     "skills-frameworks": [
       "React", "Node.js", "Express.js", "Flask", "Bootstrap", "jQuery", "TailwindCSS", "Framer Motion", "GSAP"
@@ -126,16 +139,33 @@ if (skillsSection) {
 
 
   function startSkillsTypingAnimation() {
-  document.getElementById("skills-tools").innerHTML = "";
-  document.getElementById("skills-frameworks").innerHTML = "";
-  document.getElementById("skills-core").innerHTML = "";
+    document.getElementById("skills-tools").innerHTML = "";
+    document.getElementById("skills-frameworks").innerHTML = "";
+    document.getElementById("skills-core").innerHTML = "";
 
-  typeSkill("skills-tools", skillsData["skills-tools"]);
-  typeSkill("skills-frameworks", skillsData["skills-frameworks"], 400);
-  typeSkill("skills-core", skillsData["skills-core"], 500);
-}
+    typeSkill("skills-tools", skillsData["skills-tools"]);
+    typeSkill("skills-frameworks", skillsData["skills-frameworks"], 400);
+    typeSkill("skills-core", skillsData["skills-core"], 500);
+  }
 
-  
+
+  // Observator pentru secțiunea skills
+  const skillsSection = document.querySelector('#skills');
+
+  if (skillsSection) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          resetSkillsSection();         // 🧹 curăță tot ce era
+          animateSkillsText();          // 🟠 animă titlul
+          startSkillsTypingAnimation(); // 🟢 animă lista
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(skillsSection);
+  }
+
 
 
 });
