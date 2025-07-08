@@ -32,64 +32,64 @@ document.addEventListener("DOMContentLoaded", function () {
   let skillsAlreadyAnimated = false;
 
   function resetSkillsSection() {
-  const h1 = document.getElementById('animated-skills-text');
-  const text = h1.getAttribute('data-original-text');
-
-  if (text) {
-    h1.innerHTML = text; // pune înapoi textul original cu <br>
-  }
-
-  // Golește complet listele de skilluri
-  document.getElementById("skills-tools").innerHTML = "";
-  document.getElementById("skills-frameworks").innerHTML = "";
-  document.getElementById("skills-core").innerHTML = "";
-}
-
-
-  // --- Animația textului pornită imediat ---
-  function animateSkillsText() {
     const h1 = document.getElementById('animated-skills-text');
     if (!h1) return;
 
-    // Dacă deja are span-uri, oprește animația
-    if (h1.querySelector('span')) return;
-
-    const text = h1.getAttribute('data-original-text') || h1.innerHTML;
-    h1.innerHTML = ''; // curăță conținutul inițial
-    h1.setAttribute('data-original-text', text);
-
-    // Transformați textul în caractere, inclusiv <br>
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = text;
-    const nodes = Array.from(tempDiv.childNodes);
-
-    nodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        // Split textul normal în caractere
-        for (let char of node.textContent) {
-          const span = document.createElement('span');
-          span.textContent = char;
-          h1.appendChild(span);
-        }
-      } else if (node.nodeName === 'BR') {
-        h1.appendChild(document.createElement('br'));
-      }
+    // Resetăm textul pentru fiecare span
+    const lines = h1.querySelectorAll('span');
+    lines.forEach(span => {
+      span.classList.remove('colored');
+      span.textContent = span.getAttribute('data-original') || '';
     });
 
-    // Animația literă cu literă
-    const spans = h1.querySelectorAll('span');
+    h1.classList.remove('animated');
+
+    // Golește complet listele de skilluri
+    document.getElementById("skills-tools").innerHTML = "";
+    document.getElementById("skills-frameworks").innerHTML = "";
+    document.getElementById("skills-core").innerHTML = "";
+  }
+
+
+
+  // --- Animația textului pornită imediat ---
+
+  function animateSkillsText() {
+    const h1 = document.getElementById('animated-skills-text');
+    if (!h1 || h1.classList.contains('animated')) return;
+
+    const lines = h1.querySelectorAll('span');
     let index = 0;
 
-    function colorizeLetters() {
-      if (index < spans.length) {
-        spans[index].classList.add('colored');
+    function animateNextLetter(span) {
+      const text = span.textContent;
+      span.textContent = '';
+      let i = 0;
+
+      function typeLetter() {
+        if (i < text.length) {
+          span.textContent += text.charAt(i);
+          span.classList.add('colored'); // adaugă portocaliu
+          i++;
+          setTimeout(typeLetter, 100);
+        }
+      }
+
+      typeLetter();
+    }
+
+    function startAnimation() {
+      if (index < lines.length) {
+        animateNextLetter(lines[index]);
         index++;
-        setTimeout(colorizeLetters, 150);
+        setTimeout(startAnimation, 500); // între linii
       }
     }
 
-    colorizeLetters();
+    startAnimation();
+    h1.classList.add('animated');
   }
+
 
 
 
