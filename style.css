@@ -193,6 +193,30 @@ body {
 
 
 /* Stiluri pentru titlul și sloganul logo-ului */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Stil pentru butonul de download */
+.cv-download-btn {
+  padding: 10px 16px;
+  background-color: #6e675fcc;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.cv-download-btn:hover {
+  background-color: #e76909d3;
+}
+
+
 .logo h1 {
   font-size: 24px;
   font-weight: bold;
